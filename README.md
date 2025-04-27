@@ -18,7 +18,7 @@ In GCP we have development environment with already set up python and github int
 ![alt text](./docs/image.png)
 3. Clone repository from github with command (accept everything suggested by authorization process): 
 ```
-git clone https://github.com/WoWNZ/data-engine-nba
+git clone https://github.com/yangyu3-wiqnz/data-engine-nba
 ```
 4. Change folder to `data-engine-nba`: 
 ```
