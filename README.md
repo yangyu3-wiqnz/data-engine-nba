@@ -1,5 +1,5 @@
 This is a template for analytical repositories. To start using it, click button on eb-page "Use this template".
-Replace all mentions of "wwnz-ai-analytical-project-template" in repository to the new repository name
+Replace all mentions of "data-engine-nba" in repository to the new repository name
 
 Owner: _Code Owners (team who maintains this repository)_
 
@@ -18,11 +18,11 @@ In GCP we have development environment with already set up python and github int
 ![alt text](./docs/image.png)
 3. Clone repository from github with command (accept everything suggested by authorization process): 
 ```
-git clone https://github.com/WoWNZ/wwnz-ai-analytical-project-template
+git clone https://github.com/WoWNZ/data-engine-nba
 ```
-4. Change folder to `wwnz-ai-analytical-project-template`: 
+4. Change folder to `data-engine-nba`: 
 ```
-cd wwnz-ai-analytical-project-template
+cd data-engine-nba
 ```
 5. Make sure that you have an access to Analytical sandbox. Run script `setup_local_env.sh`: 
 ```
@@ -34,7 +34,7 @@ It will create a profile.yml file for dbt connection in proper folder and datase
 
 **Work should start from changing folder to repo one and activating your virtual environment**:
 ```
-cd wwnz-ai-analytical-project-template
+cd data-engine-nba
 source venv/bin/activate
 ```
 
