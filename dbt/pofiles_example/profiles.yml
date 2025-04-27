@@ -1,0 +1,12 @@
+wwnz-ai-dbt:
+  target: local
+  outputs:
+    local:
+      type: bigquery
+      method: oauth
+      threads: 8
+      project: gcp-wow-cd-email-app-test
+      dataset: dbt_dev__*username*
+      location: US
+      priority: interactive
+      retries: 1
