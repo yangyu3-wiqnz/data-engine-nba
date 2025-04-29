@@ -1,0 +1,63 @@
+version: '3.7'
+services:
+  postgres:
+    image: postgres:13
+    environment:
+      - POSTGRES_USER=airflow
+      - POSTGRES_PASSWORD=airflow
+      - POSTGRES_DB=airflow
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data
+
+  airflow-webserver:
+    image: apache/airflow:2.8.3 # Use the latest stable version
+    command: webserver
+    restart: on-failure
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - ./logs:/opt/airflow/logs
+      - ./plugins:/opt/airflow/plugins
+    environment:
+      - AIRFLOW__CORE__EXECUTOR=SequentialExecutor # For simplicity, can be changed later
+      - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres:5432/airflow
+      - AIRFLOW__CORE__FERNET_KEY=bmwbFBN0SKYIdcpvEPWZvMB-n0l2DCxKBjWRx0vkCgc= # Generate a Fernet key
+      - AIRFLOW__SCHEDULER__DAG_DIR=/opt/airflow/dags
+    depends_on:
+      - postgres
+    healthcheck:
+      test: ["CMD-SHELL", "airflow db check"]
+      interval: 30s
+      timeout: 30s
+      retries: 3
+
+  airflow-scheduler:
+    image: apache/airflow:2.8.3 # Use the latest stable version
+    command: scheduler
+    restart: on-failure
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - ./logs:/opt/airflow/logs
+      - ./plugins:/opt/airflow/plugins
+    environment:
+      - AIRFLOW__CORE__EXECUTOR=SequentialExecutor # For simplicity, can be changed later
+      - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres:5432/airflow
+      - AIRFLOW__CORE__FERNET_KEY=bmwbFBN0SKYIdcpvEPWZvMB-n0l2DCxKBjWRx0vkCgc= # Use the same Fernet key as webserver
+      - AIRFLOW__SCHEDULER__DAG_DIR=/opt/airflow/dags
+    depends_on:
+      - postgres
+      - airflow-webserver
+    healthcheck:
+      test: ["CMD-SHELL", "airflow scheduler health"]
+      interval: 30s
+      timeout: 30s
+      retries: 3
+
+volumes:
+  postgres_data:
+  logs:
+  dags:
+  plugins:
