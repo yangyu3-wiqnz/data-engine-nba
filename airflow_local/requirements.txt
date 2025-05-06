@@ -1,0 +1,5 @@
+# requirements.txt
+apache-airflow-providers-google
+# Add other Python packages your DAGs will need, e.g.:
+# pandas
+# requests
