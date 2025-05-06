@@ -1,0 +1,9 @@
+version: 2
+
+sources:
+  - name: source_api
+    database: gcp-nba-pel-prod  # Replace with your actual GCP project ID
+    schema: source_api
+    tables:
+      - name: ext_players
+        description: Raw player data from an external source which normally NBA official API
