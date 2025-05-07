@@ -2,3 +2,4 @@ venv/
 .idea/
 logs/
 airflow_local/gcp-credentials/
+airflow_local/datasets/
