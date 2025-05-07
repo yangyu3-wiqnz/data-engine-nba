@@ -86,6 +86,7 @@ x-airflow-common: &airflow-common
     - ${AIRFLOW_PROJ_DIR:-.}/plugins:/opt/airflow/plugins
     # Add volume for GCP credentials
     - ./gcp-credentials:/opt/airflow/gcp-credentials:ro # 'ro' for read-only
+    - ./datasets:/opt/airflow/datasets # datasets for storing datasets ingested from NBA API    
   user: "${AIRFLOW_UID}:${AIRFLOW_GID}"
   depends_on:
     &airflow-common-depends-on

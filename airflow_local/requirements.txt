@@ -1,5 +1,6 @@
-# requirements.txt
+# airflow_local/requirements.txt
 apache-airflow-providers-google
-# Add other Python packages your DAGs will need, e.g.:
-# pandas
-# requests
+pandas
+pyarrow
+nba_api
+requests
