@@ -9,7 +9,7 @@ import requests
 import os # For joining paths and checking file existence
 
 # Keep your existing function, maybe rename for clarity if it's part of a larger module
-def append_missing_player_data_logic(df_player_master_list, current_player_data_df, players_to_fetch_count=10):
+def append_missing_player_data_logic(df_player_master_list, current_player_data_df, players_to_fetch_count=100):
     """
     Retrieves data for a batch of players missing from current_player_data_df
     (based on IDs in df_player_master_list) and returns an updated DataFrame.
@@ -150,7 +150,7 @@ def run_player_extraction_and_save(base_datasets_dir: str,
     updated_player_data_df = append_missing_player_data_logic(
         df_player_master.copy(), 
         player_data_df_current.copy(),
-        players_to_fetch_count=10 # This matches your script's batch size
+        players_to_fetch_count=100 # This matches your script's batch size
     )
 
     # 4. Save the updated (or original if no changes) DataFrame back to CSV

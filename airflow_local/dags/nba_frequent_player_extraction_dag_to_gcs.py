@@ -28,7 +28,7 @@ GCS_PLAYER_DATA_OBJECT_PATH = "nba_data_accumulated/players_full.parquet" # Stor
     This DAG runs a Python script every 3 minutes to:
     1. Read a master player list (`""" + GCS_MASTER_LIST_OBJECT_PATH + """`) from GCS bucket `""" + GCS_BUCKET_NAME + """`.
     2. Read current accumulated player data (`""" + GCS_PLAYER_DATA_OBJECT_PATH + """`) from the same GCS bucket.
-    3. Fetch data for up to 10 missing players using the nba_api.
+    3. Fetch data for up to 100 missing players using the nba_api.
     4. Upload the updated accumulated player data (as Parquet) back to the GCS bucket.
 
     **Prerequisites in GCS:**
@@ -51,7 +51,7 @@ def frequent_nba_player_data_to_gcs_dag():
                 gcs_bucket_name=GCS_BUCKET_NAME,
                 master_list_gcs_object=GCS_MASTER_LIST_OBJECT_PATH,
                 player_data_gcs_object=GCS_PLAYER_DATA_OBJECT_PATH,
-                players_to_fetch_batch_size=10
+                players_to_fetch_batch_size=100
             )
             print("DAG Task: 'run_player_extraction_and_upload_to_gcs' completed.")
         except Exception as e:

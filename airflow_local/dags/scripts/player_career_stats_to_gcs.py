@@ -11,7 +11,7 @@ from google.cloud.exceptions import NotFound # Specific exception for GCS object
 
 # This is the core logic for fetching and appending data.
 # It's the same as before, taking DataFrames as input.
-def append_missing_player_data_logic(df_player_master_list, current_player_data_df, players_to_fetch_count=10):
+def append_missing_player_data_logic(df_player_master_list, current_player_data_df, players_to_fetch_count=100):
     existing_player_ids_in_data = pd.Series(dtype='int64')
     if 'player_id' in current_player_data_df.columns and not current_player_data_df.empty:
         existing_player_ids_in_data = current_player_data_df['player_id']
@@ -70,7 +70,7 @@ def run_player_extraction_and_upload_to_gcs(
     gcs_bucket_name: str,
     master_list_gcs_object: str,    # e.g., "nba_config/players.csv"
     player_data_gcs_object: str,    # e.g., "nba_data_accumulated/players_full.parquet"
-    players_to_fetch_batch_size: int = 10
+    players_to_fetch_batch_size: int = 100
 ):
     """
     Main function for GCS operations:
