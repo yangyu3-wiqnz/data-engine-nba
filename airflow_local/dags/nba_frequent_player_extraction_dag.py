@@ -21,6 +21,7 @@ PLAYER_DATA_CSV_FILENAME = "players_full.csv"  # Name of your accumulating data 
     dag_id='nba_extract_10_players_script_v1', # Updated DAG ID for clarity
     schedule='*/3 * * * *',  # Cron expression: "at every 3rd minute"
     start_date=pendulum.datetime(2025, 5, 7, tz="Pacific/Auckland"), 
+    end_date=pendulum.datetime(2025, 5, 8, 0, 0, 0, tz="Pacific/Auckland"), # Example: Stop on May 8th, 2025, at midnight NZST
     catchup=False,
     max_active_runs=1,
     tags=['nba', 'frequent-extraction', 'scripted', 'local-save'],
